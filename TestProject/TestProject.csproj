@@ -87,6 +87,10 @@
       <Project>{2430bc48-2884-4f9d-bc31-4ed4d8965f1b}</Project>
       <Name>AutomatedTests</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WebLogger\WebLogger.csproj">
+      <Project>{8b23ce61-7f91-453e-b418-e053888b846b}</Project>
+      <Name>WebLogger</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

@@ -18,9 +18,27 @@ namespace AutomatedTests
         public Login(IWebDriver dr)
         {
             driver = dr;
+
+            string defaultTitle = "Log in - My ASP.NET MVC Application";
+            string actualTitle = dr.Title;
+
+            if (!defaultTitle.Equals(actualTitle))
+            {
+                throw new PagesException("Wrong Page Has Just Been Loaded!");
+            }
         }
 
-        //logowanie na strone functions
+        public Functions LogInFun(string userName, string userPassword)
+        {
+            driver.FindElement(By.Id("UserName")).Clear();
+            driver.FindElement(By.Id("UserName")).SendKeys(userName);
+            driver.FindElement(By.Id("Password")).Clear();
+            driver.FindElement(By.Id("Password")).SendKeys(userPassword);
+            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
+            return new Functions(driver);
+        }
+
+        //nieuzywane!
         public Functions LogIn(string login, string password)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));

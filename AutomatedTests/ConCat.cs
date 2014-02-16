@@ -16,7 +16,15 @@ namespace AutomatedTests
         private IWebDriver driver;
         public ConCat(IWebDriver dr)
         {
-            dr = driver;
+            driver = dr;
+            string defaultTitle = "Concat - My ASP.NET MVC Application";
+            string actualTitle = dr.Title;
+
+            if (!defaultTitle.Equals(actualTitle))
+            {
+                throw new PagesException("Wrong Page Has Just Been Loaded!");
+            }
+
         }
 
         public string InputFirstString()
@@ -32,7 +40,7 @@ namespace AutomatedTests
             switch (str)
             {
                 case StringsToInput.Windows:
-                    var textbox1 = new System.Windows.Forms.TextBox();
+                    //var textbox1 = new System.Windows.Forms.TextBox();
                     driver.FindElement(By.Name("textbox1")).Clear();
                     driver.FindElement(By.Name("textbox1")).SendKeys("Windows");
                     return new ConCat(driver);
@@ -50,6 +58,14 @@ namespace AutomatedTests
             driver.FindElement(By.Id("but")).Click();
             return new ConCat(driver);
         }
+
+        public ConCat EnterText(string FieldName, string Text)
+        {
+            driver.FindElement(By.Name(FieldName)).Clear();
+            driver.FindElement(By.Name(FieldName)).SendKeys(Text);
+            return this;
+        }
+
 
     }
 }

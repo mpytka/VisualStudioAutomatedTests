@@ -17,7 +17,15 @@ namespace AutomatedTests
         //konstruktor
         public Contact(IWebDriver dr)
         {
-            dr = driver;
+            driver = dr;
+
+            string defaultTitle = "Contact - My ASP.NET MVC Application";
+            string actualTitle = dr.Title;
+
+            if (!defaultTitle.Equals(actualTitle))
+            {
+                throw new PagesException("Wrong Page Has Just Been Loaded!");
+            }
         }
 
     }

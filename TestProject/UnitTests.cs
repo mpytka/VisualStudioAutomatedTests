@@ -7,6 +7,8 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AutomatedTests;
+using WebLogger;
+
 
 namespace TestProject
 {
@@ -14,16 +16,22 @@ namespace TestProject
     public class UnitTests
     {
         private IWebDriver driver;
-        private StringBuilder verificationErrors;
+        //private StringBuilder verificationErrors;
         private string baseURL;
         private bool acceptNextAlert = true;
+        private Logger Logger { get; set; }
+        private string TestName { get; set; }
 
         [TestInitialize]
         public void SetupTest()
         {
+            this.Logger = new Logger();
             driver = new FirefoxDriver();
+            //zrobic fabryke stron enumem
             baseURL = "http://vm-at-qaevent13.fp.lan:81/";
             driver.Navigate().GoToUrl(baseURL);
+            this.Logger.AddNewLog("Nastapila zmiana strony", baseURL);
+            this.Logger.SaveLogs("Inicjalizator");
 
         }
 
@@ -49,18 +57,26 @@ namespace TestProject
             login.LogIn("Automation", "Automation");
             
         }
-
+        
+        //testowe, nieczytelne, ze ja pierdole
         [TestMethod]
         public void ChecksTheResultOfTheCalculation()
         {
             //arrange
-            var login = new Login(driver);
-            var func = new Functions(driver);
-            var calc = new Calculator(driver);
-           
-            //act
-            login.LogIn("Automation", "Automation");
-            func.NavigateToCalcPage();
+            this.Logger = new Logger();
+            //testcontext - do wyciagniecia (do spr)  !!!!!!!!!!!!!!!!
+            this.TestName = "ChecksTheResultOfTheCalculation";
+            //na potrzebe testu czy działa
+            for (int i = 0; i < 100; i++)
+            {
+                this.Logger.AddNewLog("TESTLOG - CheckTheResultOfTheCalculation", i.ToString());
+            }
+            Homepage home = new Homepage(driver);
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElement(By.LinkText("Log in")));
+            Login login = home.LoginButton();
+            Functions func = login.LogInFun("Automation", "Automation");
+            Calculator calc = func.NavigateToCalcPage();
             calc.ClickCalculatorNumber(KeyNumber.one);
             calc.ClickCalculatorNumber(KeyNumber.plus);
             calc.ClickCalculatorNumber(KeyNumber.two);
@@ -68,6 +84,18 @@ namespace TestProject
             
             //assert
             Assert.AreEqual("3", calc.CheckCalcInputValue());
+        }
+
+       //bez asercji, dla testow czy sie tekst wpiesuje
+        [TestMethod]
+        public void EntersTextToTextbox()
+        {
+            Homepage home = new Homepage(driver);
+            Login login = home.LoginButton();
+            Functions func = login.LogInFun("Automation", "Automation");
+            ConCat concat = func.NavigateToConCatPage();
+            concat.EnterText("textbox1", "Test");
+            
         }
 
         [TestMethod]

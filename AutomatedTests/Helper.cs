@@ -10,21 +10,19 @@ using AutomatedTests;
 
 namespace AutomatedTests
 {
-    public class ButtonClick
+    public class Helper
     {
         private IWebDriver driver;
-        public ButtonClick(IWebDriver dr)
+
+        public Helper(IWebDriver dr)
         {
             driver = dr;
-
-            string defaultTitle = "ButtonClick - My ASP.NET MVC Application";
-            string actualTitle = dr.Title;
-
-            if (!defaultTitle.Equals(actualTitle))
-            {
-                throw new PagesException("Wrong Page Has Just Been Loaded!");
-            }
         }
 
+        public Homepage LogOffButton()
+        {
+            driver.FindElement(By.Name("Log off")).Click();
+            return new Homepage(driver);
+        }
     }
 }

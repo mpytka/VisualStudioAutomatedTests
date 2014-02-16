@@ -16,7 +16,15 @@ namespace AutomatedTests
 
         public About(IWebDriver dr)
         {
-            dr = driver;
+            driver = dr;
+
+            string defaultTitle = "About - My ASP.NET MVC Application";
+            string actualTitle = dr.Title;
+
+            if (!defaultTitle.Equals(actualTitle))
+            {
+                throw new PagesException("Wrong Page Has Just Been Loaded!");
+            }
         }
 
        
