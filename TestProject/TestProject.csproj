@@ -83,7 +83,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ClassLibrary1\AutomatedTests.csproj">
+    <ProjectReference Include="..\AutomatedTests\AutomatedTests.csproj">
       <Project>{2430bc48-2884-4f9d-bc31-4ed4d8965f1b}</Project>
       <Name>AutomatedTests</Name>
     </ProjectReference>
