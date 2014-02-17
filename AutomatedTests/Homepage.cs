@@ -23,18 +23,18 @@ namespace AutomatedTests
 
             if (!defaultTitle.Equals(actualTitle))
             {
-                throw new PagesException("Wrong Page Has Just Been Loaded!");
+                throw new PagesException("Wrong Page Has Just Been Loaded! It is not Homepage");
             }
 
         }
 
-        public Login LoginButton()
+        public Login LoginWithLoginButton()
         {
             driver.FindElement(By.XPath("//a[@href='/Account/Login']")).Click();
             return new Login(driver);
         }
 
-        public Login LoginNEWButton()
+        public Login LoginWithNEWButton()
         {
             driver.FindElement(By.XPath("//a[@href='/Account/LoginNew']")).Click();
             return new Login(driver);

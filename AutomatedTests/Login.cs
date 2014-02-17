@@ -24,12 +24,14 @@ namespace AutomatedTests
 
             if (!defaultTitle.Equals(actualTitle))
             {
-                throw new PagesException("Wrong Page Has Just Been Loaded!");
+                throw new PagesException("Wrong Page Has Just Been Loaded! It is not Login Page");
             }
         }
 
-        public Functions LogInFun(string userName, string userPassword)
+        public Functions LogInFunction(string userName, string userPassword)
         {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
+            wait.Until(d => d.FindElement(By.LinkText("Log in"))).Click();
             driver.FindElement(By.Id("UserName")).Clear();
             driver.FindElement(By.Id("UserName")).SendKeys(userName);
             driver.FindElement(By.Id("Password")).Clear();
@@ -38,17 +40,5 @@ namespace AutomatedTests
             return new Functions(driver);
         }
 
-        //nieuzywane!
-        public Functions LogIn(string login, string password)
-        {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(d => d.FindElement(By.LinkText("Log in"))).Click();
-            driver.FindElement(By.Id("UserName")).Clear();
-            driver.FindElement(By.Id("UserName")).SendKeys(login);
-            driver.FindElement(By.Id("Password")).Clear();
-            driver.FindElement(By.Id("Password")).SendKeys(password);
-            driver.FindElement(By.CssSelector("input[type=\"submit\"]")).Click();
-            return new Functions(driver);
-        }
     }
 }

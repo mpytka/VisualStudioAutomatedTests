@@ -22,7 +22,7 @@ namespace AutomatedTests
 
             if (!defaultTitle.Equals(actualTitle))
             {
-                throw new PagesException("Wrong Page Has Just Been Loaded!");
+                throw new PagesException("Wrong Page Has Just Been Loaded! It is not ConCat Page");
             }
 
         }
@@ -56,7 +56,7 @@ namespace AutomatedTests
         public ConCat ClickCombineButton()
         {
             driver.FindElement(By.Id("but")).Click();
-            return new ConCat(driver);
+            return this;
         }
 
         public ConCat EnterText(string FieldName, string Text)

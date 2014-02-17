@@ -23,7 +23,7 @@ namespace AutomatedTests
 
             if (!defaultTitle.Equals(actualTitle))
             {
-                throw new PagesException("Wrong Page Has Just Been Loaded!");
+                throw new PagesException("Wrong Page Has Just Been Loaded! It is not about page");
             }
         }
 

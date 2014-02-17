@@ -54,7 +54,7 @@ namespace TestProject
         public void ChecksLoggingInToTheFunctionPage()
         {
             var login = new Login(driver);
-            login.LogIn("Automation", "Automation");
+            login.LogInFunction("Automation", "Automation");
             
         }
         
@@ -74,8 +74,8 @@ namespace TestProject
             Homepage home = new Homepage(driver);
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
             wait.Until(d => d.FindElement(By.LinkText("Log in")));
-            Login login = home.LoginButton();
-            Functions func = login.LogInFun("Automation", "Automation");
+            Login login = home.LoginWithLoginButton();
+            Functions func = login.LogInFunction("Automation", "Automation");
             Calculator calc = func.NavigateToCalcPage();
             calc.ClickCalculatorNumber(KeyNumber.one);
             calc.ClickCalculatorNumber(KeyNumber.plus);
@@ -91,8 +91,8 @@ namespace TestProject
         public void EntersTextToTextbox()
         {
             Homepage home = new Homepage(driver);
-            Login login = home.LoginButton();
-            Functions func = login.LogInFun("Automation", "Automation");
+            Login login = home.LoginWithLoginButton();
+            Functions func = login.LogInFunction("Automation", "Automation");
             ConCat concat = func.NavigateToConCatPage();
             concat.EnterText("textbox1", "Test");
             
@@ -109,7 +109,7 @@ namespace TestProject
 
             //act
 
-            login.LogIn("Automation", "Automation");
+            login.LogInFunction("Automation", "Automation");
             func.NavigateToConCatPage();
 
             concat.InputString(StringsToInput.Windows);
