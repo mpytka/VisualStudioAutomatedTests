@@ -47,22 +47,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ButtonClick.cs" />
-    <Compile Include="Calculator.cs" />
-    <Compile Include="ConCat.cs" />
-    <Compile Include="Contact.cs" />
-    <Compile Include="About.cs" />
-    <Compile Include="Enum.cs" />
-    <Compile Include="Functions.cs" />
+    <Compile Include="Pages\ConCat.cs" />
+    <Compile Include="Pages\Enum.cs" />
     <Compile Include="Helper.cs" />
-    <Compile Include="Homepage.cs" />
-    <Compile Include="Login.cs" />
     <Compile Include="PagesException.cs" />
+    <Compile Include="Pages\AboutPage.cs" />
+    <Compile Include="Pages\ButtonClickPage.cs" />
+    <Compile Include="Pages\CalculatorPage.cs" />
+    <Compile Include="Pages\ConcatPage.cs" />
+    <Compile Include="Pages\ContactPage.cs" />
+    <Compile Include="Pages\FunctionsPage.cs" />
+    <Compile Include="Pages\Home.cs" />
+    <Compile Include="Pages\IPage.cs" />
+    <Compile Include="Pages\LoginNewPage.cs" />
+    <Compile Include="Pages\LoginPage.cs" />
+    <Compile Include="Pages\PagesFactory.cs" />
+    <Compile Include="Pages\PageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

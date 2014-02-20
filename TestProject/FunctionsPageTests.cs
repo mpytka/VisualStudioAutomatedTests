@@ -8,12 +8,13 @@ using OpenQA.Selenium.Support.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using AutomatedTests;
 using WebLogger;
+using AutomatedTests.Pages;
 
 
 namespace TestProject
 {
     [TestClass]
-    public class UnitTests
+    public class FunctionsPageTests
     {
         private IWebDriver driver;
         //private StringBuilder verificationErrors;
@@ -27,7 +28,8 @@ namespace TestProject
         {
             this.Logger = new Logger();
             driver = new FirefoxDriver();
-            //zrobic fabryke stron enumem
+            driver.Manage().Window.Maximize();
+            string URL = ConstantValues.BaseURL();
             baseURL = "http://vm-at-qaevent13.fp.lan:81/";
             driver.Navigate().GoToUrl(baseURL);
             this.Logger.AddNewLog("Nastapila zmiana strony", baseURL);
@@ -49,73 +51,20 @@ namespace TestProject
             
         }
 
-
         [TestMethod]
-        public void ChecksLoggingInToTheFunctionPage()
+        public void Testowa()
         {
-            var login = new Login(driver);
-            login.LogInFunction("Automation", "Automation");
-            
+            var page = PagesFactory.CreatePage(PageType.Home, this.driver, "Agenda: - My ASP.NET MVC Application");
+            // tu trzeba kliknac w loguj z helpera  AutomatedTests.Helper.
+            var log = PagesFactory.CreatePage(PageType.LoginPage, this.driver, "Log in - My ASP.NET MVC Application");
+            (log as LoginPage).LogInFunction("Automation", "Automation");
+            var func = PagesFactory.CreatePage(PageType.FunctionsPage, this.driver, "Functions - My ASP.NET MVC Application");
+            (func as FunctionsPage).GoToCalcPage();
+            var calc = PagesFactory.CreatePage(PageType.FunctionsPage, this.driver, "Calculator - My ASP.NET MVC Application");
+            (calc as CalculatorPage).ClickCalculatorNumber(KeyNumber.one);
+
         }
         
-        //testowe, nieczytelne, ze ja pierdole
-        [TestMethod]
-        public void ChecksTheResultOfTheCalculation()
-        {
-            //arrange
-            this.Logger = new Logger();
-            //testcontext - do wyciagniecia (do spr)  !!!!!!!!!!!!!!!!
-            this.TestName = "ChecksTheResultOfTheCalculation";
-            //na potrzebe testu czy działa
-            for (int i = 0; i < 100; i++)
-            {
-                this.Logger.AddNewLog("TESTLOG - CheckTheResultOfTheCalculation", i.ToString());
-            }
-            Homepage home = new Homepage(driver);
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(d => d.FindElement(By.LinkText("Log in")));
-            Login login = home.LoginWithLoginButton();
-            Functions func = login.LogInFunction("Automation", "Automation");
-            Calculator calc = func.NavigateToCalcPage();
-            calc.ClickCalculatorNumber(KeyNumber.one);
-            calc.ClickCalculatorNumber(KeyNumber.plus);
-            calc.ClickCalculatorNumber(KeyNumber.two);
-            calc.ClickCalculatorNumber(KeyNumber.DoIt);
-            
-            //assert
-            Assert.AreEqual("3", calc.CheckCalcInputValue());
-        }
-
-       //bez asercji, dla testow czy sie tekst wpiesuje
-        [TestMethod]
-        public void EntersTextToTextbox()
-        {
-            Homepage home = new Homepage(driver);
-            Login login = home.LoginWithLoginButton();
-            Functions func = login.LogInFunction("Automation", "Automation");
-            ConCat concat = func.NavigateToConCatPage();
-            concat.EnterText("textbox1", "Test");
-            
-        }
-
-        [TestMethod]
-        public void ChecksIfCombineButtonAddsStringsToEachOther()
-        {
-            //arrange
-
-            var login = new Login(driver);
-            var func = new Functions(driver);
-            var concat = new ConCat(driver);
-
-            //act
-
-            login.LogInFunction("Automation", "Automation");
-            func.NavigateToConCatPage();
-
-            concat.InputString(StringsToInput.Windows);
-
-        }
-
         private bool IsElementPresent(By by)
         {
             try

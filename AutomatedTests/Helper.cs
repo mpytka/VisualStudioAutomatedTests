@@ -10,19 +10,33 @@ using AutomatedTests;
 
 namespace AutomatedTests
 {
-    public class Helper
+    public class Helper 
     {
-        private IWebDriver driver;
+        private IWebDriver Driver;
+        public string PageName { get; set; }
 
-        public Helper(IWebDriver dr)
+        public Helper(IWebDriver iwd)
         {
-            driver = dr;
+            this.Driver = iwd;
         }
 
-        public Homepage LogOffButton()
+        public Pages.IPage LogOffButton()
         {
-            driver.FindElement(By.Name("Log off")).Click();
-            return new Homepage(driver);
+            this.Driver.FindElement(By.Name("Log off")).Click();
+            return Pages.PagesFactory.CreatePage(Pages.PageType.LoginPage, Driver, PageName);
         }
+
+        public Pages.IPage LoginWithLoginButton()
+        {
+            this.Driver.FindElement(By.XPath("//a[@href='/Account/Login']")).Click();
+            return Pages.PagesFactory.CreatePage(Pages.PageType.LoginPage, Driver, PageName);
+        }
+
+        public Pages.IPage LoginWithNEWButton()
+        {
+            this.Driver.FindElement(By.XPath("//a[@href='/Account/LoginNew']")).Click();
+            return Pages.PagesFactory.CreatePage(Pages.PageType.LoginPage, Driver, PageName);
+        }
+
     }
 }

@@ -76,7 +76,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="UnitTests.cs" />
+    <Compile Include="ConstantValues.cs" />
+    <Compile Include="HomePageTests.cs" />
+    <Compile Include="LoginPageTests.cs" />
+    <Compile Include="CalculatorPageTests.cs" />
+    <Compile Include="FunctionsPageTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
