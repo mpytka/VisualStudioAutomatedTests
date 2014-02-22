@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using WebLogger.DataItems;
-using System.Collections.Generic;
 using System.IO;
 
 namespace WebLogger
 {
+    // observer pattern
+
     public class Logger
     {
         List<LogItem> Logs { get; set; }
@@ -32,7 +33,9 @@ namespace WebLogger
         {
             if (!Directory.Exists("Logs")) 
                 Directory.CreateDirectory("Logs");
-            using (var sw = new StreamWriter(String.Format("Logs\\{0}{1}.txt", testName, DateTime.Now.ToLongTimeString().Replace(':', '_'))))
+
+            string customTimeFormat = DateTime.Now.ToLongTimeString().Replace(':', '_');
+            using (var sw = new StreamWriter(String.Format("Logs\\{0}{1}.txt", testName, customTimeFormat)))
             {
                 foreach (var item in this.Logs)
                 {

@@ -37,60 +37,62 @@ namespace AutomatedTests.Pages
                 case PageType.ButtonClickPage:
                     var waitForButtonClickLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
                     waitForButtonClickLink.Until(r => r.FindElement(By.LinkText("ButtonClick"))).Click();
-                    return PagesFactory.CreatePage(PageType.ButtonClickPage, Driver, PageName);
+                    return PagesFactory.CreatePage(PageType.ButtonClickPage);
+                
                 case PageType.CalculatorPage:
                     var waitForCalculatorLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
                     waitForCalculatorLink.Until(r => r.FindElement(By.LinkText("Calculator"))).Click();
-                    return PagesFactory.CreatePage(PageType.CalculatorPage, Driver, PageName);
+                    return PagesFactory.CreatePage(PageType.CalculatorPage);
+                
                 case PageType.ConcatPage:
                      var waitForConcatLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
                      waitForConcatLink.Until(r => r.FindElement(By.LinkText("Concat"))).Click();
-                     return PagesFactory.CreatePage(PageType.ConcatPage, Driver, PageName);
+                     return PagesFactory.CreatePage(PageType.ConcatPage);
+
+                case PageType.Home:
+                     var waitForHomeLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                     waitForHomeLink.Until(r => r.FindElement(By.LinkText("Home"))).Click();
+                     return PagesFactory.CreatePage(PageType.Home);
+
+                case PageType.AboutPage:
+                     var waitForAboutLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                     waitForAboutLink.Until(r => r.FindElement(By.LinkText("About"))).Click();
+                     return PagesFactory.CreatePage(PageType.AboutPage);
+
+                case PageType.ContactPage:
+                     var waitForContactLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                     waitForContactLink.Until(r => r.FindElement(By.LinkText("About"))).Click();
+                     return PagesFactory.CreatePage(PageType.ContactPage);
+
+                case PageType.HomeWithLogOff:
+                     var waitForLogOffLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                     waitForLogOffLink.Until(r => r.FindElement(By.Name("Log off"))).Click();
+                     return Pages.PagesFactory.CreatePage(Pages.PageType.Home);
+                
+                //stad da sie dostac do home page rowniez za pomoca logoff
                 default:
                     break;
             }
             return null;
         }
 
-        public IPage GoToCalcPage()
-        {
-            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
-            wait.Until(r => r.FindElement(By.LinkText("Calculator"))).Click();
-            return PagesFactory.CreatePage(PageType.CalculatorPage, Driver, PageName);
-        }
-
-        public IPage GoToConCatPage()
-        {
-            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
-            wait.Until(r => r.FindElement(By.LinkText("Concat"))).Click();
-            return PagesFactory.CreatePage(PageType.ConcatPage, Driver, PageName);
-        }
-
-        public IPage GoToButtonClickPage()
-        {
-            var wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
-            wait.Until(r => r.FindElement(By.LinkText("ButtonClick"))).Click();
-            return PagesFactory.CreatePage(PageType.ButtonClickPage, Driver, PageName);
-        }
-
+        //Navigate to page using URL
         public IPage NavigateToConCatPage()
         {
             Driver.Navigate().GoToUrl(baseURL + "/Functions/Concat");
-            
-            return PagesFactory.CreatePage(PageType.ConcatPage, Driver, PageName);
+            return PagesFactory.CreatePage(PageType.ConcatPage);
         }
 
         public IPage NavigateToCalcPage()
         {
             Driver.Navigate().GoToUrl(baseURL + "/Functions/Calculator");
-            return PagesFactory.CreatePage(PageType.CalculatorPage, Driver, PageName);
+            return PagesFactory.CreatePage(PageType.CalculatorPage);
         }
 
         public IPage NavigateToButtonClickPagePage()
         {
             Driver.Navigate().GoToUrl(baseURL + "/Functions/ButtonClick");
-            return PagesFactory.CreatePage(PageType.ButtonClickPage, Driver, PageName);
+            return PagesFactory.CreatePage(PageType.ButtonClickPage);
         }
-
     }
 }

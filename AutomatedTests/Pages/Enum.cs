@@ -14,6 +14,7 @@ namespace AutomatedTests
 
     public enum StringsToInput
     {
-        Windows, Phone
+        TestowyNapis, TestowyNapisWDrugimPolu
     }
+
 }

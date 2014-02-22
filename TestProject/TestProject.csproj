@@ -76,7 +76,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="ConstantValues.cs" />
     <Compile Include="HomePageTests.cs" />
     <Compile Include="LoginPageTests.cs" />
     <Compile Include="CalculatorPageTests.cs" />

@@ -9,42 +9,89 @@ namespace AutomatedTests.Pages
 {
     public static class PagesFactory
     {
-        public static IPage CreatePage(PageType pt, IWebDriver iwd, string pageName)
+        private static IWebDriver m_iwd;
+        //IPage m_currentlytestingPage;
+
+        public static void Configure(IWebDriver iwd)
         {
+            m_iwd = iwd;
+        }
+
+        public static IPage CreatePage(PageType pt)
+        {
+            string pageName = string.Empty;
             switch (pt)
             {
                 case PageType.Home:
-                    if (pageName == "") pageName = "Agenda: - My ASP.NET MVC Application";
-                   return new Home(iwd, pageName);
-
+                   pageName = "Agenda: - My ASP.NET MVC Application";
+                   return new Home(m_iwd, pageName);
                 case PageType.AboutPage:
-                    if (pageName == "") pageName = "About - My ASP.NET MVC Application";
-                    return new AboutPage(iwd, pageName);
+                    pageName = "About - My ASP.NET MVC Application";
+                    return new AboutPage(m_iwd, pageName);
                 case PageType.ButtonClickPage:
-                    if (pageName == "") pageName = "ButtonClick - My ASP.NET MVC Application";
-                    return new ButtonClickPage(iwd, pageName);
+                   pageName = "ButtonClick - My ASP.NET MVC Application";
+                    return new ButtonClickPage(m_iwd, pageName);
                 case PageType.CalculatorPage:
-                    if (pageName == "") pageName = "Calculator - My ASP.NET MVC Application";
-                    return new CalculatorPage(iwd, pageName);
+                    pageName = "Calculator - My ASP.NET MVC Application";
+                    return new CalculatorPage(m_iwd, pageName);
                 case PageType.LoginPage:
-                    if (pageName == "") pageName = "Log in - My ASP.NET MVC Application";
-                    return new LoginPage(iwd, pageName);
+                    pageName = "Log in - My ASP.NET MVC Application";
+                    return new LoginPage(m_iwd, pageName);
                 case PageType.LoginNewPage:
-                    if (pageName == "") pageName = "Log in NEW - My ASP.NET MVC Application";
-                    return new LoginNewPage(iwd, pageName);
+                    pageName = "Log in NEW - My ASP.NET MVC Application";
+                    return new LoginNewPage(m_iwd, pageName);
                 case PageType.ContactPage:
-                    if (pageName == "") pageName = "Contact - My ASP.NET MVC Application";
-                    return new ContactPage(iwd, pageName);
+                    pageName = "Contact - My ASP.NET MVC Application";
+                    return new ContactPage(m_iwd, pageName);
                 case PageType.FunctionsPage:
-                    if (pageName == "") pageName = "Functions - My ASP.NET MVC Application";
-                    return new FunctionsPage(iwd, pageName);
+                    pageName = "Functions - My ASP.NET MVC Application";
+                    return new FunctionsPage(m_iwd, pageName);
                 case PageType.ConcatPage:
-                    if (pageName == "") pageName = "Concat - My ASP.NET MVC Application";
-                    return new ConcatPage(iwd, pageName);
+                    pageName = "Concat - My ASP.NET MVC Application";
+                    return new ConcatPage(m_iwd, pageName);
                 default:
                     break;
             }
             return null;
         }
+
+        public static IPage SetPage(PageType pt)
+        {
+            switch (pt)
+            {
+                case PageType.Home:
+                    break;
+                case PageType.AboutPage:
+                    break;
+                case PageType.ButtonClickPage:
+                    break;
+                case PageType.CalculatorPage:
+                    break;
+                case PageType.LoginPage:
+                    break;
+                case PageType.LoginNewPage:
+                    break;
+                case PageType.ContactPage:
+                    break;
+                
+                case PageType.FunctionsPage:
+                   var page = new Helper(m_iwd);
+                    page.LoginWithLoginButton();
+                    var log = PagesFactory.CreatePage(PageType.LoginPage);
+                    log.NavigateToPage(PageType.FunctionsPage);
+                     var func = PagesFactory.CreatePage(PageType.FunctionsPage);
+                    func.NavigateToPage(PageType.CalculatorPage);
+                    return PagesFactory.CreatePage(PageType.CalculatorPage);
+               
+                case PageType.ConcatPage:
+                    break;
+                case PageType.HomeWithLogOff:
+                    break;
+                default:
+                    break;
+            }
+            return null;
+        }
+       
     }
 }

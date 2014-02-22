@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataRetrieval.cs" />
     <Compile Include="Pages\ConCat.cs" />
     <Compile Include="Pages\Enum.cs" />
     <Compile Include="Helper.cs" />
@@ -64,11 +65,23 @@
     <Compile Include="Pages\PagesFactory.cs" />
     <Compile Include="Pages\PageType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WellKnownValues.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\WebLogger\WebLogger.csproj">
+      <Project>{8b23ce61-7f91-453e-b418-e053888b846b}</Project>
+      <Name>WebLogger</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Values.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

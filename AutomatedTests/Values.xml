@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hash>
+<properties>
+  <credentials>
+    <user>Automation</user>
+    <password>Automation</password>
+  </credentials>
+  <URL>
+    <baseURL>http://vm-at-qaevent13.fp.lan:81/</baseURL>
+  </URL>
+</properties>
+</hash>

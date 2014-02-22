@@ -17,5 +17,6 @@ namespace AutomatedTests.Pages
         ContactPage,
         FunctionsPage,
         ConcatPage,
+        HomeWithLogOff
     }
 }

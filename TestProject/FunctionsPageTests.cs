@@ -16,25 +16,21 @@ namespace TestProject
     [TestClass]
     public class FunctionsPageTests
     {
-        private IWebDriver driver;
-        //private StringBuilder verificationErrors;
-        private string baseURL;
+        public IWebDriver driver;
         private bool acceptNextAlert = true;
-        private Logger Logger { get; set; }
+        public Logger Logger { get; set; }
         private string TestName { get; set; }
+        IPage m_currentlytestingPage;
 
         [TestInitialize]
         public void SetupTest()
         {
             this.Logger = new Logger();
             driver = new FirefoxDriver();
-            driver.Manage().Window.Maximize();
-            string URL = ConstantValues.BaseURL();
-            baseURL = "http://vm-at-qaevent13.fp.lan:81/";
-            driver.Navigate().GoToUrl(baseURL);
-            this.Logger.AddNewLog("Nastapila zmiana strony", baseURL);
+            PagesFactory.Configure(driver);
+            driver.Navigate().GoToUrl(WellKnownValues.baseURL);
+            this.Logger.AddNewLog("Nastapila zmiana strony", WellKnownValues.baseURL);
             this.Logger.SaveLogs("Inicjalizator");
-
         }
 
         [TestCleanup]
@@ -52,16 +48,9 @@ namespace TestProject
         }
 
         [TestMethod]
-        public void Testowa()
+        public void Name()
         {
-            var page = PagesFactory.CreatePage(PageType.Home, this.driver, "Agenda: - My ASP.NET MVC Application");
-            // tu trzeba kliknac w loguj z helpera  AutomatedTests.Helper.
-            var log = PagesFactory.CreatePage(PageType.LoginPage, this.driver, "Log in - My ASP.NET MVC Application");
-            (log as LoginPage).LogInFunction("Automation", "Automation");
-            var func = PagesFactory.CreatePage(PageType.FunctionsPage, this.driver, "Functions - My ASP.NET MVC Application");
-            (func as FunctionsPage).GoToCalcPage();
-            var calc = PagesFactory.CreatePage(PageType.FunctionsPage, this.driver, "Calculator - My ASP.NET MVC Application");
-            (calc as CalculatorPage).ClickCalculatorNumber(KeyNumber.one);
+            
 
         }
         
@@ -112,5 +101,7 @@ namespace TestProject
                 acceptNextAlert = true;
             }
         }
+
+        public WebLogger.Logger FunctionsPageLogger { get; set; }
     }
 }

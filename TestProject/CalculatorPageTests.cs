@@ -16,14 +16,10 @@ namespace TestProject
     [TestClass]
     public class CalculatorPageTests
     {
-        private IWebDriver driver;
-        //private StringBuilder verificationErrors;
-        private string baseURL;
+        public IWebDriver driver;
         private bool acceptNextAlert = true;
-        private Logger Logger { get; set; }
+        public Logger Logger { get; set; }
         private string TestName { get; set; }
-        private ConstantValues Constant { get; set; }
-
         IPage m_currentlytestingPage;
 
         [TestInitialize]
@@ -31,18 +27,15 @@ namespace TestProject
         {
             this.Logger = new Logger();
             driver = new FirefoxDriver();
-            baseURL = "http://vm-at-qaevent13.fp.lan:81/";
-            driver.Navigate().GoToUrl(baseURL);
-            this.Logger.AddNewLog("Nastapila zmiana strony", baseURL);
+            PagesFactory.Configure(driver);
+            var setvalues = new DataRetrieval();
+            setvalues.LoadValues("user", "password"); //wyszukiwanie po tagu w xml
+            driver.Navigate().GoToUrl(WellKnownValues.baseURL);
+            this.Logger.AddNewLog("Nastapila zmiana strony", WellKnownValues.baseURL);
             this.Logger.SaveLogs("Inicjalizator");
-//Navigate to calculator page
-            var page = new Helper(driver);
-            (page as Helper).LoginWithLoginButton();
-            var log = PagesFactory.CreatePage(PageType.LoginPage, this.driver,"Log in - My ASP.NET MVC Application");
-            (log as LoginPage).LogInFunction("Automation", "Automation");
-            var func = PagesFactory.CreatePage(PageType.FunctionsPage, this.driver,"Functions - My ASP.NET MVC Application");
-            (func as FunctionsPage).GoToCalcPage();
-            m_currentlytestingPage = PagesFactory.CreatePage(PageType.FunctionsPage, this.driver, "Calculator - My ASP.NET MVC Application");
+
+            //arrange
+            m_currentlytestingPage = PagesFactory.SetPage(PageType.FunctionsPage);
 
         }
 
@@ -61,11 +54,16 @@ namespace TestProject
         }
 
         [TestMethod]
-        public void Testowa()
+        public void ChecksIfACalculationValueIsCorrect()
         {
-            
+            //act
             (m_currentlytestingPage as CalculatorPage).ClickCalculatorNumber(KeyNumber.one);
-
+            (m_currentlytestingPage as CalculatorPage).ClickCalculatorNumber(KeyNumber.plus);
+            (m_currentlytestingPage as CalculatorPage).ClickCalculatorNumber(KeyNumber.one);
+            (m_currentlytestingPage as CalculatorPage).ClickCalculatorNumber(KeyNumber.DoIt);
+            string result = (m_currentlytestingPage as CalculatorPage).CheckCalcInputValue();
+            //assert
+            Assert.AreEqual("2", result);
         }
 
         private bool IsElementPresent(By by)

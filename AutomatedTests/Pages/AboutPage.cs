@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
+using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -32,23 +33,30 @@ namespace AutomatedTests.Pages
             switch (nextPage)
             {
                 case PageType.Home:
-                    break;
+                   var waitForHomeLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForHomeLink.Until(r => r.FindElement(By.LinkText("Home"))).Click();
+                    return PagesFactory.CreatePage(PageType.Home);
+                
                 case PageType.AboutPage:
-                    break;
-                case PageType.ButtonClickPage:
-                    break;
-                case PageType.CalculatorPage:
-                    break;
+                   var waitForAboutLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForAboutLink.Until(r => r.FindElement(By.LinkText("About"))).Click();
+                    return PagesFactory.CreatePage(PageType.AboutPage);
+                
                 case PageType.LoginPage:
-                    break;
+                    var waitForLoginLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForLoginLink.Until(r => r.FindElement(By.XPath("//a[@href='/Account/Login']"))).Click();
+                    return Pages.PagesFactory.CreatePage(Pages.PageType.LoginPage);
+                
                 case PageType.LoginNewPage:
-                    break;
+                    var waitForLoginNewLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForLoginNewLink.Until(r => r.FindElement(By.XPath("//a[@href='/Account/LoginNew']"))).Click();
+                    return Pages.PagesFactory.CreatePage(Pages.PageType.LoginNewPage);
+                
                 case PageType.ContactPage:
-                    break;
-                case PageType.FunctionsPage:
-                    break;
-                case PageType.ConcatPage:
-                    break;
+                     var waitForContactLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForContactLink.Until(r => r.FindElement(By.LinkText("About"))).Click();
+                    return PagesFactory.CreatePage(PageType.ContactPage);
+                
                 default:
                     break;
             }

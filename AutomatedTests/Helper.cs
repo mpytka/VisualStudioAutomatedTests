@@ -23,19 +23,19 @@ namespace AutomatedTests
         public Pages.IPage LogOffButton()
         {
             this.Driver.FindElement(By.Name("Log off")).Click();
-            return Pages.PagesFactory.CreatePage(Pages.PageType.LoginPage, Driver, PageName);
+            return Pages.PagesFactory.CreatePage(Pages.PageType.Home);
         }
 
         public Pages.IPage LoginWithLoginButton()
         {
             this.Driver.FindElement(By.XPath("//a[@href='/Account/Login']")).Click();
-            return Pages.PagesFactory.CreatePage(Pages.PageType.LoginPage, Driver, PageName);
+            return Pages.PagesFactory.CreatePage(Pages.PageType.LoginPage);
         }
 
         public Pages.IPage LoginWithNEWButton()
         {
             this.Driver.FindElement(By.XPath("//a[@href='/Account/LoginNew']")).Click();
-            return Pages.PagesFactory.CreatePage(Pages.PageType.LoginPage, Driver, PageName);
+            return Pages.PagesFactory.CreatePage(Pages.PageType.LoginPage);
         }
 
     }

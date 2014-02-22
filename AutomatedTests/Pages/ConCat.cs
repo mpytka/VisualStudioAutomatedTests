@@ -39,15 +39,15 @@ namespace AutomatedTests
         {
             switch (str)
             {
-                case StringsToInput.Windows:
+                case StringsToInput.TestowyNapis:
                     //var textbox1 = new System.Windows.Forms.TextBox();
                     driver.FindElement(By.Name("textbox1")).Clear();
-                    driver.FindElement(By.Name("textbox1")).SendKeys("Windows");
+                    driver.FindElement(By.Name("textbox1")).SendKeys("TestowyNapis");
                     return new ConCat(driver);
 
                  
-                 case StringsToInput.Phone:
-                    driver.FindElement(By.Name("textbox2")).SendKeys("Phone");
+                 case StringsToInput.TestowyNapisWDrugimPolu:
+                    driver.FindElement(By.Name("textbox2")).SendKeys("TestowyNapisWDrugimPolu");
                     return new ConCat(driver);
             }
             return new ConCat(driver);

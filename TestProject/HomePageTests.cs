@@ -1,69 +1,105 @@
 ﻿using System;
 using System.Text;
-using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Threading;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using AutomatedTests;
+using WebLogger;
+using AutomatedTests.Pages;
+
 
 namespace TestProject
 {
-    /// <summary>
-    /// Summary description for HomePageTests
-    /// </summary>
     [TestClass]
     public class HomePageTests
     {
-        public HomePageTests()
+        private IWebDriver driver;
+        private bool acceptNextAlert = true;
+        public Logger Logger { get; set; }
+        public string TestName { get; set; }
+        IPage m_currentlytestingPage;
+
+        [TestInitialize]
+        public void SetupTest()
         {
-            //
-            // TODO: Add constructor logic here
-            //
+            this.Logger = new Logger();
+            driver = new FirefoxDriver();
+            PagesFactory.Configure(driver);
+            driver.Navigate().GoToUrl(WellKnownValues.baseURL);
+            this.Logger.AddNewLog("Nastapila zmiana strony", WellKnownValues.baseURL);
+            this.Logger.SaveLogs("Inicjalizator");
         }
 
-        private TestContext testContextInstance;
-
-        /// <summary>
-        ///Gets or sets the test context which provides
-        ///information about and functionality for the current test run.
-        ///</summary>
-        public TestContext TestContext
+        [TestCleanup]
+        public void TeardownTest()
         {
-            get
+            try
             {
-                return testContextInstance;
+                driver.Quit();
             }
-            set
+            catch (Exception)
             {
-                testContextInstance = value;
+                // Ignore errors if unable to close the browser
             }
-        }
 
-        #region Additional test attributes
-        //
-        // You can use the following additional attributes as you write your tests:
-        //
-        // Use ClassInitialize to run code before running the first test in the class
-        // [ClassInitialize()]
-        // public static void MyClassInitialize(TestContext testContext) { }
-        //
-        // Use ClassCleanup to run code after all tests in a class have run
-        // [ClassCleanup()]
-        // public static void MyClassCleanup() { }
-        //
-        // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
+        }
 
         [TestMethod]
-        public void TestMethod1()
+        public void Name()
         {
-            //
-            // TODO: Add test logic here
-            //
+
+
+        }
+
+        private bool IsElementPresent(By by)
+        {
+            try
+            {
+                driver.FindElement(by);
+                return true;
+            }
+            catch (NoSuchElementException)
+            {
+                return false;
+            }
+        }
+
+        private bool IsAlertPresent()
+        {
+            try
+            {
+                driver.SwitchTo().Alert();
+                return true;
+            }
+            catch (NoAlertPresentException)
+            {
+                return false;
+            }
+        }
+
+        private string CloseAlertAndGetItsText()
+        {
+            try
+            {
+                IAlert alert = driver.SwitchTo().Alert();
+                string alertText = alert.Text;
+                if (acceptNextAlert)
+                {
+                    alert.Accept();
+                }
+                else
+                {
+                    alert.Dismiss();
+                }
+                return alertText;
+            }
+            finally
+            {
+                acceptNextAlert = true;
+            }
         }
     }
 }

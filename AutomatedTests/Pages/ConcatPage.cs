@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using System;
+using OpenQA.Selenium.Support.UI;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,28 +34,47 @@ namespace AutomatedTests.Pages
             switch (nextPage)
             {
                 case PageType.Home:
-                    break;
+                    var waitForHomeLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForHomeLink.Until(r => r.FindElement(By.LinkText("Home"))).Click();
+                    return PagesFactory.CreatePage(PageType.Home);
+
                 case PageType.AboutPage:
-                    break;
-                case PageType.ButtonClickPage:
-                    break;
-                case PageType.CalculatorPage:
-                    break;
-                case PageType.LoginPage:
-                    break;
-                case PageType.LoginNewPage:
-                    break;
+                    var waitForAboutLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForAboutLink.Until(r => r.FindElement(By.LinkText("About"))).Click();
+                    return PagesFactory.CreatePage(PageType.AboutPage);
+
                 case PageType.ContactPage:
-                    break;
+                    var waitForContactLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForContactLink.Until(r => r.FindElement(By.LinkText("About"))).Click();
+                    return PagesFactory.CreatePage(PageType.ContactPage);
+
+                case PageType.HomeWithLogOff:
+                    var waitForLogOffLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForLogOffLink.Until(r => r.FindElement(By.Name("Log off"))).Click();
+                    return Pages.PagesFactory.CreatePage(Pages.PageType.Home);
+
                 case PageType.FunctionsPage:
-                    break;
-                case PageType.ConcatPage:
-                    break;
+                    var waitForFunctionsLink = new WebDriverWait(Driver, TimeSpan.FromSeconds(20));
+                    waitForFunctionsLink.Until(r => r.FindElement(By.LinkText("Functions"))).Click();
+                    return PagesFactory.CreatePage(PageType.FunctionsPage);
+
                 default:
                     break;
             }
             return null;
         }
-    
+
+        public IPage ClickCombineButton()
+        {
+            Driver.FindElement(By.Id("but")).Click();
+            return this;
+        }
+
+        public IPage EnterText(string FieldName, string Text)
+        {
+            Driver.FindElement(By.Name(FieldName)).Clear();
+            Driver.FindElement(By.Name(FieldName)).SendKeys(Text);
+            return this;
+        }
     }
 }
