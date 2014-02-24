@@ -48,7 +48,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataRetrieval.cs" />
-    <Compile Include="Pages\ConCat.cs" />
     <Compile Include="Pages\Enum.cs" />
     <Compile Include="Helper.cs" />
     <Compile Include="PagesException.cs" />

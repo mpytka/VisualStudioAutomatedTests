@@ -11,7 +11,7 @@ namespace AutomatedTests
     public static class WellKnownValues
     {
         public static string baseURL = "http://vm-at-qaevent13.fp.lan:81/";
-        public static string user;// = "Automation";
-        public static string password;// = "Automation";
+        public static string user;
+        public static string password;
     }
 }

@@ -35,7 +35,7 @@ namespace TestProject
             this.Logger.SaveLogs("Inicjalizator");
 
             //arrange
-            m_currentlytestingPage = PagesFactory.SetPage(PageType.FunctionsPage);
+            m_currentlytestingPage = PagesFactory.SetPage(PageType.CalculatorPage);
 
         }
 

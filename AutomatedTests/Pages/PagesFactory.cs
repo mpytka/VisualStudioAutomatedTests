@@ -61,14 +61,35 @@ namespace AutomatedTests.Pages
             {
                 case PageType.Home:
                     break;
+               
                 case PageType.AboutPage:
-                    break;
+                    var home = PagesFactory.CreatePage(PageType.Home);
+                    home.NavigateToPage(PageType.AboutPage);
+                    return PagesFactory.CreatePage(PageType.AboutPage);
+
                 case PageType.ButtonClickPage:
-                    break;
+                    var hel = new Helper(m_iwd);
+                    hel.LoginWithLoginButton();
+                    var loginpag = PagesFactory.CreatePage(PageType.LoginPage);
+                    loginpag.NavigateToPage(PageType.FunctionsPage);
+                    var fun = PagesFactory.CreatePage(PageType.FunctionsPage);
+                    fun.NavigateToPage(PageType.ButtonClickPage);
+                    return PagesFactory.CreatePage(PageType.ButtonClickPage);
+                
                 case PageType.CalculatorPage:
-                    break;
+                    var helpe = new Helper(m_iwd);
+                    helpe.LoginWithLoginButton();
+                    var loginpa = PagesFactory.CreatePage(PageType.LoginPage);
+                    loginpa.NavigateToPage(PageType.FunctionsPage);
+                     var funcp = PagesFactory.CreatePage(PageType.FunctionsPage);
+                    funcp.NavigateToPage(PageType.CalculatorPage);
+                    return PagesFactory.CreatePage(PageType.CalculatorPage);
+               
                 case PageType.LoginPage:
-                    break;
+                    var helper = new Helper(m_iwd);
+                    helper.LoginWithLoginButton();
+                    return PagesFactory.CreatePage(PageType.LoginPage);
+                
                 case PageType.LoginNewPage:
                     break;
                 case PageType.ContactPage:
@@ -79,12 +100,17 @@ namespace AutomatedTests.Pages
                     page.LoginWithLoginButton();
                     var log = PagesFactory.CreatePage(PageType.LoginPage);
                     log.NavigateToPage(PageType.FunctionsPage);
-                     var func = PagesFactory.CreatePage(PageType.FunctionsPage);
-                    func.NavigateToPage(PageType.CalculatorPage);
-                    return PagesFactory.CreatePage(PageType.CalculatorPage);
+                    return PagesFactory.CreatePage(PageType.FunctionsPage);
                
                 case PageType.ConcatPage:
-                    break;
+                    var help = new Helper(m_iwd);
+                    help.LoginWithLoginButton();
+                    var loginp = PagesFactory.CreatePage(PageType.LoginPage);
+                    loginp.NavigateToPage(PageType.FunctionsPage);
+                    var functions = PagesFactory.CreatePage(PageType.FunctionsPage);
+                    functions.NavigateToPage(PageType.ConcatPage);
+                    return PagesFactory.CreatePage(PageType.ConcatPage);
+                
                 case PageType.HomeWithLogOff:
                     break;
                 default:
